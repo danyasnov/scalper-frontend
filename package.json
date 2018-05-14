@@ -1,0 +1,24 @@
+{
+  "name": "scalper-task-list",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "crypto": "^1.0.1",
+    "react": "^16.3.2",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4",
+    "react-select": "^1.2.1",
+    "react-table": "^6.8.2",
+    "react-telegram-login": "^1.0.2-beta-6"
+  },
+  "scripts": {
+    "start": "BROWSER=none PORT=8000 react-scripts start",
+    "build": "REACTENV=prod react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "scp -r ./build root@159.89.105.184:/opt/live/my-first-app"
+
+  }
+}

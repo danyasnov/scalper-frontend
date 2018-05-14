@@ -1,0 +1,7 @@
+.Select-menu-outer {
+    z-index: 3;
+}
+
+.DialogForm-filter-type > div:nth-child(2) {
+     margin-top: 0;
+}

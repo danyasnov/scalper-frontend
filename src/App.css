@@ -1,0 +1,8 @@
+.row {
+  margin: 15px 0;
+}
+
+.App-table-controls {
+  display: flex;
+  justify-content: space-around;
+}
