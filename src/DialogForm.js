@@ -131,7 +131,7 @@ class DialogForm extends Component {
                         <ButtonToolbar>
                             <ToggleButtonGroup type="radio" name="bookType" value={this.state.bookType}
                                                onChange={e => this.handleInputChange(e, 'bookType')}>
-                                <ToggleButton value={0} disabled>Both</ToggleButton>
+                                {/*<ToggleButton value={0} disabled>Both</ToggleButton>*/}
                                 <ToggleButton value={1}>Buy</ToggleButton>
                                 <ToggleButton value={2}>Sell</ToggleButton>
                             </ToggleButtonGroup>
