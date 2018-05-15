@@ -215,7 +215,7 @@ class App extends Component {
                     <Media>
                         <Media.Body></Media.Body>
                         <Media.Right>
-                            <Button bsStyle="primary" onClick={this.handleOpenDialog}>
+                            <Button disabled={!this.state.markets} bsStyle="primary" onClick={this.handleOpenDialog}>
                                 Create task
                             </Button>
                         </Media.Right>

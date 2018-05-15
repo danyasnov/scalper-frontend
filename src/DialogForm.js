@@ -33,7 +33,7 @@ class DialogForm extends Component {
         } else {
             this.state = {
                 exchange: 'bittrex',
-                currency: 'ETH',
+                currency: this.props.markets['bittrex'][0].value,
                 interval: 5,
                 bookType: 1,
                 filterType: 0,
@@ -52,10 +52,11 @@ class DialogForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        this.setState({submitted: true});
 
         if (this.validateFilterValue() === 'success' && this.validatePriceRange() === 'success') {
             const auth = JSON.parse(JSON.stringify(localStorage.getItem('auth')));
-            let {currency, interval, filterType, filterValue, bookType, _id, priceRange} = this.state;
+            let {currency, interval, filterType, filterValue, bookType, _id, priceRange, exchange} = this.state;
 
             axios.post(`${config.backend}/task?auth=${auth}`, {
                 _id,
@@ -65,7 +66,8 @@ class DialogForm extends Component {
                 filterValue,
                 bookType,
                 priceRange,
-                active: true
+                active: true,
+                exchange
             }).then((res) => {
                 this.props.onSubmit(res.data, !!_id);
             })
@@ -76,6 +78,8 @@ class DialogForm extends Component {
 
     handleInputChange(value, name) {
         if (name === 'filterValue' && value) value = parseInt(value, 10);
+
+        if (name === 'exchange' && value) this.setState({currency: this.props.markets[value][0].value});
 
         this.setState({
             [name]: value
@@ -191,7 +195,7 @@ class DialogForm extends Component {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="submit" onClick={this.handleCloseDialog}>Submit</Button>
+                    <Button disabled={this.state.submitted} type="submit" onClick={this.handleCloseDialog}>Submit</Button>
                 </Modal.Footer>
             </form>
 
