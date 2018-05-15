@@ -14,7 +14,9 @@ import {
     Media
 } from 'react-bootstrap'
 import config from './config';
+import ccxt from 'ccxt'
 
+const proxy = 'https://cors.io/?';
 
 class App extends Component {
 
@@ -50,13 +52,41 @@ class App extends Component {
             })
         }
 
-        axios.get(`${config.bittrexUrl}/getmarkets`).then(res => {
-            const currencies = res.data.result
-                .filter(item => item.BaseCurrency === 'BTC')
-                .map(item => ({label: item.MarketCurrency, value: item.MarketCurrency}));
+        const bittrex = new ccxt.bittrex({proxy});
+        const binance = new ccxt.binance({proxy});
+        const kucoin = new ccxt.kucoin({proxy});
+        const bitfinex = new ccxt.bitfinex({proxy});
+        const poloniex = new ccxt.poloniex({proxy});
 
-            this.setState({currencies})
-        });
+        Promise.all([
+            bittrex.loadMarkets(),
+            binance.loadMarkets(),
+            kucoin.loadMarkets(),
+            bitfinex.loadMarkets(),
+            poloniex.loadMarkets()]).then(data => {
+            const [bittrexMarkets,
+                binanceMarkets,
+                kucoinMarkets,
+                bitfinexMarkets,
+                poloniexMarkets] = data;
+
+            const markets = {
+                bittrex: mapMarkets(bittrexMarkets),
+                binance: mapMarkets(binanceMarkets),
+                kucoin: mapMarkets(kucoinMarkets),
+                bitfinex: mapMarkets(bitfinexMarkets),
+                poloniex: mapMarkets(poloniexMarkets),
+            };
+
+
+            this.setState({markets});
+
+            function mapMarkets(markets) {
+                return Object.values(markets)
+                    .filter(item => item.quote === 'BTC')
+                    .map(item => ({label: item.base, value: item.base}))
+            }
+        })
 
 
     }
@@ -118,6 +148,11 @@ class App extends Component {
     }
 
     columns = [
+        {
+            Header: 'Exchange',
+            accessor: 'exchange',
+            Cell: ({value}) => (`${value.charAt(0).toUpperCase() + value.slice(1)}`)
+        },
         {
             Header: 'Currency',
             accessor: 'currency',
@@ -200,7 +235,7 @@ class App extends Component {
                 <Modal show={this.state.showDialog}
                        onHide={this.handleCloseDialog}>
                     <DialogForm onSubmit={this.handleSubmit}
-                                currencies={this.state.currencies}
+                                markets={this.state.markets}
                                 data={this.state.selectedTask}/>
                 </Modal>
                 <Row>

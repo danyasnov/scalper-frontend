@@ -18,18 +18,21 @@ import 'react-select/dist/react-select.css';
 import './DialogForm.css'
 import config from './config'
 
+let exchanges = ['bittrex', 'binance', 'kucoin', 'bitfinex', 'poloniex']
+    .map(item => ({label: item.charAt(0).toUpperCase() + item.slice(1), value: item}));
+
 
 class DialogForm extends Component {
 
     constructor(props) {
         super(props);
 
-        // console.log(props.data)
 
         if (props.data) {
             this.state = props.data
         } else {
             this.state = {
+                exchange: 'bittrex',
                 currency: 'ETH',
                 interval: 5,
                 bookType: 1,
@@ -88,17 +91,29 @@ class DialogForm extends Component {
 
     validatePriceRange() {
         const value = this.state.priceRange;
-        if (value >= 0 && value <=100) return 'success';
+        if (value >= 0 && value <= 100) return 'success';
         else return 'error';
     }
 
     render() {
+
         return (
             <form onSubmit={this.handleSubmit}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create task</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <FormGroup controlId="formControlsExchange">
+                        <ControlLabel>Exchange</ControlLabel>
+                        <Select
+                            clearable={false}
+                            backspaceRemoves={false}
+                            name="form-field-name"
+                            onChange={e => this.handleInputChange(e && e.value, 'exchange')}
+                            value={this.state.exchange}
+                            options={exchanges}
+                        />
+                    </FormGroup>
                     <FormGroup controlId="formControlsCurrency">
                         <ControlLabel>Currency</ControlLabel>
                         <Select
@@ -107,7 +122,7 @@ class DialogForm extends Component {
                             name="form-field-name"
                             onChange={e => this.handleInputChange(e && e.value, 'currency')}
                             value={this.state.currency}
-                            options={this.props.currencies}
+                            options={this.props.markets[this.state.exchange]}
                         />
                     </FormGroup>
 

@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "cctx": "^1.0.1",
+    "ccxt": "^1.13.147",
     "crypto": "^1.0.1",
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
@@ -19,6 +21,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "scp -r ./build root@159.89.105.184:/opt/live/my-first-app"
-
   }
 }
