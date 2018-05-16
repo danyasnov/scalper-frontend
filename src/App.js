@@ -14,7 +14,6 @@ import {
     Media
 } from 'react-bootstrap'
 import config from './config';
-import ccxt from 'ccxt'
 
 const proxy = 'https://cors.io/?';
 
@@ -52,11 +51,11 @@ class App extends Component {
             })
         }
 
-        const bittrex = new ccxt.bittrex({proxy});
-        const binance = new ccxt.binance({proxy});
-        const kucoin = new ccxt.kucoin({proxy});
-        const bitfinex = new ccxt.bitfinex({proxy});
-        const poloniex = new ccxt.poloniex({proxy});
+        const bittrex = new window.ccxt.bittrex({proxy});
+        const binance = new window.ccxt.binance({proxy});
+        const kucoin = new window.ccxt.kucoin({proxy});
+        const bitfinex = new window.ccxt.bitfinex({proxy});
+        const poloniex = new window.ccxt.poloniex({proxy});
 
         Promise.all([
             bittrex.loadMarkets(),
