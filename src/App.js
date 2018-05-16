@@ -192,7 +192,7 @@ class App extends Component {
             accessor: '_id',
             Cell: ({value}) => (
                 <div className="App-table-controls">
-                    <Button bsSize="xsmall" bsStyle="warning" onClick={() => this.changeTask(value)}>Change</Button>
+                    <Button disabled={!this.state.markets} bsSize="xsmall" bsStyle="warning" onClick={() => this.changeTask(value)}>Change</Button>
                     <Button bsSize="xsmall" bsStyle="danger" onClick={() => this.removeTask(value)}>Remove</Button>
                 </div>
             ),

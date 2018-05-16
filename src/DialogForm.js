@@ -18,8 +18,13 @@ import 'react-select/dist/react-select.css';
 import './DialogForm.css'
 import config from './config'
 
-let exchanges = ['bittrex', 'binance', 'kucoin', 'bitfinex', 'poloniex']
-    .map(item => ({label: item.charAt(0).toUpperCase() + item.slice(1), value: item}));
+let exchanges = [
+    'bittrex',
+    'binance',
+    // 'kucoin',
+    // 'bitfinex',
+    // 'poloniex'
+].map(item => ({label: item.charAt(0).toUpperCase() + item.slice(1), value: item}));
 
 
 class DialogForm extends Component {
@@ -195,7 +200,8 @@ class DialogForm extends Component {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button disabled={this.state.submitted} type="submit" onClick={this.handleCloseDialog}>Submit</Button>
+                    <Button disabled={this.state.submitted} type="submit"
+                            onClick={this.handleCloseDialog}>Submit</Button>
                 </Modal.Footer>
             </form>
 
