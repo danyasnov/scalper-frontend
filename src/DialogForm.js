@@ -43,7 +43,7 @@ class DialogForm extends Component {
                 bookType: 1,
                 filterType: 0,
                 filterValue: 30,
-                priceRange: 100
+                priceRange: 50
             };
         }
 
