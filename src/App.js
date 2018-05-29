@@ -155,7 +155,7 @@ class App extends Component {
         {
             Header: 'Currency',
             accessor: 'currency',
-            Cell: ({value}) => (`BTC-${value}`)
+            Cell: ({value}) => (`${value}/BTC`)
         },
         {
             Header: 'Interval',
