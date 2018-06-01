@@ -21,8 +21,6 @@ import config from './config'
 let exchanges = [
     'bittrex',
     'binance',
-    // 'kucoin',
-    // 'bitfinex',
     'poloniex'
 ].map(item => ({label: item.charAt(0).toUpperCase() + item.slice(1), value: item}));
 

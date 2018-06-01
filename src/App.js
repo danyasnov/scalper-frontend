@@ -53,24 +53,19 @@ class App extends Component {
 
         const bittrex = new window.ccxt.bittrex({proxy});
         const binance = new window.ccxt.binance({proxy});
-        const kucoin = new window.ccxt.kucoin({proxy});
-        const bitfinex = new window.ccxt.bitfinex({proxy});
         const poloniex = new window.ccxt.poloniex({proxy});
 
         Promise.all([
             bittrex.loadMarkets(),
             binance.loadMarkets(),
-            bitfinex.loadMarkets(),
             poloniex.loadMarkets()]).then(data => {
             const [bittrexMarkets,
                 binanceMarkets,
-                bitfinexMarkets,
                 poloniexMarkets] = data;
 
             const markets = {
                 bittrex: mapMarkets(bittrexMarkets),
                 binance: mapMarkets(binanceMarkets),
-                bitfinex: mapMarkets(bitfinexMarkets),
                 poloniex: mapMarkets(poloniexMarkets),
             };
 
