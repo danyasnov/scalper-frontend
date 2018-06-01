@@ -60,19 +60,16 @@ class App extends Component {
         Promise.all([
             bittrex.loadMarkets(),
             binance.loadMarkets(),
-            kucoin.loadMarkets(),
             bitfinex.loadMarkets(),
             poloniex.loadMarkets()]).then(data => {
             const [bittrexMarkets,
                 binanceMarkets,
-                kucoinMarkets,
                 bitfinexMarkets,
                 poloniexMarkets] = data;
 
             const markets = {
                 bittrex: mapMarkets(bittrexMarkets),
                 binance: mapMarkets(binanceMarkets),
-                kucoin: mapMarkets(kucoinMarkets),
                 bitfinex: mapMarkets(bitfinexMarkets),
                 poloniex: mapMarkets(poloniexMarkets),
             };
